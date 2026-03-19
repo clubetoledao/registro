@@ -361,7 +361,7 @@ class App {
                 const historico = [...aluno.remarcacoes].sort((a,b) => b.timestamp - a.timestamp);
                 historicoList.innerHTML = historico.map(r => `
                     <div class="historico-item">
-                        <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                        <div>
                             <span class="historico-motivo">${r.motivo}</span>
                             <button class="btn-delete-historico" onclick="app.confirmarRemoverRemarcacao('${aluno.nome}', ${r.id})" title="Excluir remarcação">
                                 <i class="fas fa-times"></i>
