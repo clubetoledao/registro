@@ -5,15 +5,14 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
-/* Cores suaves - apenas um toque sutil do Toledão */
 :root {
-    --primary: #2c3e50;      /* Cinza azulado suave */
-    --secondary: #7f8c8d;    /* Cinza médio */
-    --accent: #e67e22;        /* Laranja suave (toque do amarelo) */
-    --light-bg: #f8f9fa;      /* Fundo claro */
-    --border: #e9ecef;        /* Borda suave */
-    --text: #495057;          /* Texto principal */
-    --text-light: #868e96;    /* Texto secundário */
+    --primary: #2c3e50;
+    --secondary: #7f8c8d;
+    --accent: #e67e22;
+    --light-bg: #f8f9fa;
+    --border: #e9ecef;
+    --text: #495057;
+    --text-light: #868e96;
     --white: #ffffff;
 }
 
@@ -23,7 +22,6 @@ body {
     padding: 30px;
 }
 
-/* Container principal - MAIOR e BRANCO */
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -33,7 +31,6 @@ body {
     overflow: hidden;
 }
 
-/* Header clean */
 header {
     background: var(--white);
     padding: 35px 40px;
@@ -64,22 +61,22 @@ header {
     color: var(--primary);
     letter-spacing: -0.5px;
 }
+
 .logo {
-height: 10vh;
-width: 10vh;
+    height: 10vh;
+    width: 10vh;
 }
+
 .subtitle {
     color: var(--text-light);
     font-size: 1.1rem;
     margin-left: 52px;
 }
 
-/* Main */
 main {
     padding: 35px 40px;
 }
 
-/* Search section */
 .search-section {
     margin-bottom: 35px;
     position: relative;
@@ -144,7 +141,6 @@ main {
     background: var(--accent);
 }
 
-/* Suggestions */
 .suggestions {
     position: absolute;
     top: calc(100% + 5px);
@@ -187,7 +183,6 @@ main {
     color: var(--text-light);
 }
 
-/* Student card - BRANCO */
 .student-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -245,7 +240,6 @@ main {
     font-size: 1rem;
 }
 
-/* Form section */
 .form-section {
     padding: 30px 35px;
     background: var(--light-bg);
@@ -301,7 +295,6 @@ main {
     cursor: not-allowed;
 }
 
-/* Historico section */
 .historico-section {
     padding: 30px 35px;
 }
@@ -321,11 +314,8 @@ main {
 }
 
 .historico-item {
-    padding: 16px 20px;
+    padding: 12px 20px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     background: var(--white);
 }
 
@@ -333,8 +323,11 @@ main {
     border-bottom: none;
 }
 
-.historico-item:hover {
-    background: var(--light-bg);
+.historico-item > div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
 }
 
 .historico-motivo {
@@ -342,16 +335,39 @@ main {
     color: var(--text);
     font-size: 1rem;
     line-height: 1.5;
+    word-break: break-word;
+}
+
+.btn-delete-historico {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete-historico:hover {
+    background: #fee;
+    color: #c92a2a;
+}
+
+.btn-delete-historico i {
+    font-size: 1rem;
+    pointer-events: none;
 }
 
 .historico-data {
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     white-space: nowrap;
-    margin-left: 20px;
 }
 
-/* Blocked message */
 .blocked-message {
     margin: 0 35px 35px 35px;
     padding: 16px 20px;
@@ -365,7 +381,6 @@ main {
     font-weight: 500;
 }
 
-/* Students section */
 .students-section {
     margin-top: 35px;
 }
@@ -409,7 +424,6 @@ main {
     border-color: var(--primary);
 }
 
-/* Students list */
 .students-list {
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -463,7 +477,6 @@ main {
     border-color: #ffc9c9;
 }
 
-/* Empty state */
 .empty-state {
     text-align: center;
     padding: 60px 30px;
@@ -476,7 +489,6 @@ main {
     opacity: 0.3;
 }
 
-/* Footer */
 footer {
     background: var(--light-bg);
     padding: 25px 40px;
@@ -506,7 +518,6 @@ footer {
     font-size: 0.95rem;
 }
 
-/* Notification */
 .notification {
     position: fixed;
     top: 30px;
@@ -546,7 +557,6 @@ footer {
     }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     body {
         padding: 15px;
@@ -585,83 +595,13 @@ footer {
         flex-direction: column;
         text-align: center;
     }
-}
-/* Botão de excluir no histórico */
-.btn-delete-historico {
-    background: none;
-    border: none;
-    color: #adb5bd;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.2s;
-    font-size: 1rem;
-    margin-left: 10px;
-    opacity: 0;
-}
 
-.historico-item:hover .btn-delete-historico {
-    opacity: 1;
-}
+    .historico-item > div {
+        flex-wrap: wrap;
+    }
 
-.btn-delete-historico:hover {
-    background: #fff5f5;
-    color: #c92a2a;
-}
-
-.historico-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--white);
-}
-
-.historico-motivo {
-    flex: 1;
-}
-
-.historico-data {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-/* Botão de excluir no histórico */
-.btn-delete-historico {
-    background: none;
-    border: none;
-    color: #adb5bd;
-    cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: all 0.2s;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-delete-historico:hover {
-    background: #fff5f5;
-    color: #c92a2a;
-}
-
-.historico-item > div {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-}
-
-.historico-motivo {
-    flex: 1;
-    word-break: break-word;
-}
-
-.historico-data {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    white-space: nowrap;
-    margin-left: auto;
-}
+    .historico-data {
+        margin-left: 0;
+        width: 100%;
+    }
+}    
