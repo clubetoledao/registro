@@ -627,3 +627,41 @@ footer {
     font-size: 0.9rem;
     white-space: nowrap;
 }
+/* Botão de excluir no histórico */
+.btn-delete-historico {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete-historico:hover {
+    background: #fff5f5;
+    color: #c92a2a;
+}
+
+.historico-item > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.historico-motivo {
+    flex: 1;
+    word-break: break-word;
+}
+
+.historico-data {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: auto;
+}
