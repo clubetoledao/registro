@@ -586,3 +586,44 @@ footer {
         text-align: center;
     }
 }
+/* Botão de excluir no histórico */
+.btn-delete-historico {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-size: 1rem;
+    margin-left: 10px;
+    opacity: 0;
+}
+
+.historico-item:hover .btn-delete-historico {
+    opacity: 1;
+}
+
+.btn-delete-historico:hover {
+    background: #fff5f5;
+    color: #c92a2a;
+}
+
+.historico-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+}
+
+.historico-motivo {
+    flex: 1;
+}
+
+.historico-data {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
