@@ -1,0 +1,588 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Cores suaves - apenas um toque sutil do Toledão */
+:root {
+    --primary: #2c3e50;      /* Cinza azulado suave */
+    --secondary: #7f8c8d;    /* Cinza médio */
+    --accent: #e67e22;        /* Laranja suave (toque do amarelo) */
+    --light-bg: #f8f9fa;      /* Fundo claro */
+    --border: #e9ecef;        /* Borda suave */
+    --text: #495057;          /* Texto principal */
+    --text-light: #868e96;    /* Texto secundário */
+    --white: #ffffff;
+}
+
+body {
+    background: linear-gradient(145deg, #f1f3f5, #e9ecef);
+    min-height: 100vh;
+    padding: 30px;
+}
+
+/* Container principal - MAIOR e BRANCO */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Header clean */
+header {
+    background: var(--white);
+    padding: 35px 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-area i {
+    font-size: 2.2rem;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.logo-area h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+.logo {
+height: 10vh;
+width: 10vh;
+}
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-left: 52px;
+}
+
+/* Main */
+main {
+    padding: 35px 40px;
+}
+
+/* Search section */
+.search-section {
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    height: 70px;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent);
+    background: var(--white);
+}
+
+.search-box i {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    height: 100%;
+    outline: none;
+    background: transparent;
+}
+
+.search-box input::placeholder {
+    color: var(--text-light);
+}
+
+.btn-add {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 35px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    letter-spacing: 0.3px;
+}
+
+.btn-add:hover {
+    background: var(--accent);
+}
+
+/* Suggestions */
+.suggestions {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    max-height: 350px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.suggestions.active {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 18px 25px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.suggestion-item:hover {
+    background: var(--light-bg);
+}
+
+.suggestion-item strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.suggestion-item small {
+    color: var(--text-light);
+}
+
+/* Student card - BRANCO */
+.student-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    margin-bottom: 35px;
+    overflow: hidden;
+}
+
+.student-header {
+    padding: 30px 35px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-bottom: 1px solid var(--border);
+}
+
+.student-avatar i {
+    font-size: 4rem;
+    color: var(--text-light);
+}
+
+.student-info {
+    flex: 1;
+}
+
+.student-info h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.student-meta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.student-code {
+    background: var(--light-bg);
+    color: var(--text);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+}
+
+.remarcacoes-badge {
+    background: var(--primary);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Form section */
+.form-section {
+    padding: 30px 35px;
+    background: var(--light-bg);
+}
+
+.form-section h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+#motivoInput {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 15px;
+    resize: vertical;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+#motivoInput:focus {
+    border-color: var(--accent);
+    outline: none;
+    background: var(--white);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px 25px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--accent);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Historico section */
+.historico-section {
+    padding: 30px 35px;
+}
+
+.historico-section h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.historico-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.historico-item {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: var(--white);
+}
+
+.historico-item:last-child {
+    border-bottom: none;
+}
+
+.historico-item:hover {
+    background: var(--light-bg);
+}
+
+.historico-motivo {
+    flex: 1;
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.historico-data {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+/* Blocked message */
+.blocked-message {
+    margin: 0 35px 35px 35px;
+    padding: 16px 20px;
+    background: #fff5f5;
+    border: 1px solid #ffc9c9;
+    border-radius: 16px;
+    color: #c92a2a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+/* Students section */
+.students-section {
+    margin-top: 35px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.section-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.btn-icon:hover {
+    background: var(--light-bg);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* Students list */
+.students-list {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.student-item {
+    padding: 18px 25px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    background: var(--white);
+}
+
+.student-item:last-child {
+    border-bottom: none;
+}
+
+.student-item:hover {
+    background: var(--light-bg);
+}
+
+.student-item-info h4 {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.student-item-info p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.student-item-badge {
+    background: var(--light-bg);
+    color: var(--text);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+}
+
+.student-item-badge.blocked {
+    background: #fff5f5;
+    color: #c92a2a;
+    border-color: #ffc9c9;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 60px 30px;
+    color: var(--text-light);
+}
+
+.empty-state i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+/* Footer */
+footer {
+    background: var(--light-bg);
+    padding: 25px 40px;
+    border-top: 1px solid var(--border);
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: var(--text-light);
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-info i {
+    color: var(--accent);
+}
+
+.footer-copyright {
+    font-size: 0.95rem;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 16px 25px;
+    border-radius: 16px;
+    color: white;
+    font-weight: 500;
+    z-index: 2000;
+    animation: slideIn 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: none;
+    min-width: 300px;
+}
+
+.notification.success {
+    background: #37b24d;
+}
+
+.notification.error {
+    background: #c92a2a;
+}
+
+.notification.warning {
+    background: var(--accent);
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .search-box i {
+        display: none;
+    }
+    
+    .search-box input {
+        width: 100%;
+        padding: 18px;
+    }
+    
+    .btn-add {
+        width: 100%;
+        padding: 18px;
+        justify-content: center;
+    }
+    
+    .student-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .student-meta {
+        justify-content: center;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}

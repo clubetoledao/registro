@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOLEDÃO - Controle de Remarcações</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header clean e branco -->
+        <header>
+            <div class="header-content">
+                <div class="logo-area">
+                    <img class="logo" src="toledaologo.png" alt="">
+                    <h1>TOLEDÃO</h1>
+                </div>
+                <p class="subtitle">Sistema de Controle de Remarcações</p>
+            </div>
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main>
+            <!-- Busca -->
+            <div class="search-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar aluno por nome ou código...">
+                    <button id="addNewStudentBtn" class="btn-add">
+                        <i class="fas fa-plus"></i> Novo Aluno
+                    </button>
+                </div>
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+
+            <!-- Área do aluno -->
+            <div id="studentInfo" class="student-card" style="display: none;">
+                <!-- Header do aluno -->
+                <div class="student-header">
+                    <div class="student-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="student-info">
+                        <h2 id="studentName"></h2>
+                        <div class="student-meta">
+                            <span id="studentCode" class="student-code"></span>
+                            <span id="remarcacoesCount" class="remarcacoes-badge">0/3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário -->
+                <div class="form-section">
+                    <h3>Nova Remarcação</h3>
+                    <textarea id="motivoInput" placeholder="Digite o motivo da remarcação..." rows="2"></textarea>
+                    <button id="addRemarcacaoBtn" class="btn-primary">
+                        <i class="fas fa-check"></i> Registrar Remarcação
+                    </button>
+                </div>
+
+                <!-- Histórico -->
+                <div class="historico-section">
+                    <h3>Histórico de Remarcações</h3>
+                    <div id="historicoList" class="historico-list"></div>
+                </div>
+
+                <!-- Bloqueio -->
+                <div id="blockStatus" class="blocked-message" style="display: none;">
+                    <i class="fas fa-ban"></i>
+                    <span>Aluno bloqueado - 3 remarcações atingidas</span>
+                </div>
+            </div>
+
+            <!-- Lista de alunos -->
+            <div class="students-section">
+                <div class="section-header">
+                    <h2>Alunos com Remarcações</h2>
+                    <div class="section-actions">
+                        <button id="refreshListBtn" class="btn-icon" title="Atualizar">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button id="exportBtn" class="btn-icon" title="Exportar dados">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="studentsList" class="students-list"></div>
+            </div>
+        </main>
+
+        <!-- Footer simples -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-info">
+                    <img class="logo" src="toledaologo.png" alt="">
+                    <span>TOLEDÃO • R. Raimundo Leonardi, 983</span>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 - Sistema de Remarcações
+                    by: Jakson
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="notification" class="notification"></div>
+    <script src="script.js"></script>
+</body>
+</html>
