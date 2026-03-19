@@ -2,7 +2,7 @@
 class Database {
     constructor() {
         this.dbName = 'ToledoDB';
-        this.dbVersion = 2; // Incrementar versão para atualizar o store
+        this.dbVersion = 3; // Incrementar versão
         this.db = null;
         this.init();
     }
@@ -26,17 +26,15 @@ class Database {
             request.onupgradeneeded = (event) => {
                 const db = event.target.result;
                 
-                // Se já existia a store antiga, remove
                 if (db.objectStoreNames.contains('alunos')) {
                     db.deleteObjectStore('alunos');
                 }
                 
-                // Criar nova store com nome como keyPath
                 const store = db.createObjectStore('alunos', { keyPath: 'nome' });
                 store.createIndex('nome', 'nome', { unique: true });
                 store.createIndex('dataCadastro', 'dataCadastro', { unique: false });
                 
-                console.log('Store de alunos recriada com nome como chave');
+                console.log('Store de alunos recriada');
             };
         });
     }
@@ -140,12 +138,42 @@ class Database {
         });
     }
 
+    // NOVA FUNÇÃO: Remover remarcação específica
+    async removerRemarcacao(nome, remarcacaoId) {
+        return new Promise((resolve, reject) => {
+            const transaction = this.db.transaction(['alunos'], 'readwrite');
+            const store = transaction.objectStore('alunos');
+            
+            const getRequest = store.get(nome);
+            
+            getRequest.onsuccess = () => {
+                const aluno = getRequest.result;
+                if (!aluno) {
+                    reject(new Error('Aluno não encontrado'));
+                    return;
+                }
+
+                // Filtrar para remover a remarcação com o ID específico
+                aluno.remarcacoes = aluno.remarcacoes.filter(r => r.id !== remarcacaoId);
+
+                const putRequest = store.put(aluno);
+                
+                putRequest.onsuccess = () => {
+                    this.atualizarStats();
+                    resolve(aluno);
+                };
+                putRequest.onerror = () => reject(putRequest.error);
+            };
+            
+            getRequest.onerror = () => reject(getRequest.error);
+        });
+    }
+
     async criarAluno(nome) {
         return new Promise((resolve, reject) => {
             const transaction = this.db.transaction(['alunos'], 'readwrite');
             const store = transaction.objectStore('alunos');
             
-            // Verificar se já existe
             const checkRequest = store.get(nome);
             
             checkRequest.onsuccess = () => {
@@ -263,14 +291,12 @@ class App {
         suggestions.classList.add('active');
     }
 
-    // Cadastro apenas com nome
     novoAluno() {
         const nome = prompt("Digite o NOME completo do aluno:");
         if (!nome) return;
         this.criarAluno(nome);
     }
 
-    // Para quando clica na sugestão
     novoAlunoComNome(sugestaoNome) {
         this.criarAluno(sugestaoNome);
     }
@@ -309,7 +335,6 @@ class App {
         
         document.getElementById('studentName').textContent = aluno.nome;
         
-        // Remover/exibir código se existir
         const studentCode = document.getElementById('studentCode');
         if (studentCode) {
             studentCode.style.display = 'none';
@@ -340,6 +365,9 @@ class App {
                     <div class="historico-item">
                         <span class="historico-motivo">${r.motivo}</span>
                         <span class="historico-data">${r.data}</span>
+                        <button class="btn-delete-historico" onclick="app.confirmarRemoverRemarcacao('${aluno.nome}', ${r.id})" title="Excluir remarcação">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 `).join('');
             } else {
@@ -348,6 +376,21 @@ class App {
         }
 
         studentInfo.style.display = 'block';
+    }
+
+    // NOVA FUNÇÃO: Confirmar e remover remarcação
+    async confirmarRemoverRemarcacao(nome, remarcacaoId) {
+        if (confirm('Tem certeza que deseja excluir esta remarcação?')) {
+            try {
+                const aluno = await this.db.removerRemarcacao(nome, remarcacaoId);
+                this.currentAluno = aluno;
+                this.mostrarAluno(aluno);
+                this.notificar('✅ Remarcação excluída com sucesso!', 'success');
+                this.carregarLista();
+            } catch (error) {
+                this.notificar('❌ Erro ao excluir remarcação', 'error');
+            }
+        }
     }
 
     async adicionarRemarcacao() {
